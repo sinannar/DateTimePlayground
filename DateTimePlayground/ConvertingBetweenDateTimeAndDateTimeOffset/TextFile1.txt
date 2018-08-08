@@ -1,0 +1,26 @@
+﻿https://docs.microsoft.com/en-us/dotnet/standard/datetime/
+https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset
+
+##Converting between DateTime and DateTimeOffset
+Although the DateTimeOffset structure provides a greater degree of time zone awareness than the DateTime structure, DateTime parameters are used more commonly in method calls. 
+Because of this, the ability to convert DateTimeOffset values to DateTime values and vice versa is particularly important.
+This topic shows how to perform these conversions in a way that preserves as much time zone information as possible.
+
+###!NOTE
+Both the DateTime and the DateTimeOffset types have some limitations when representing times in time zones.
+With its Kind property, DateTime is able to reflect only Coordinated Universal Time (UTC) and the system's local time zone.
+DateTimeOffset reflects a time's offset from UTC, but it does not reflect the actual time zone to which that offset belongs.
+For details about time values and support for time zones, see Choosing Between DateTime, DateTimeOffset, TimeSpan, and TimeZoneInfo. (THIS IS ANOTHER ARTICLE IN PARENT CONTENT https://docs.microsoft.com/en-us/dotnet/standard/datetime/choosing-between-datetime)
+//public struct DateTime		: IComparable, IComparable<DateTime>, IConvertible, IEquatable<DateTime>, IFormattable, System.Runtime.Serialization.ISerializable
+//public struct DateTimeOffset	: IComparable, IComparable<DateTimeOffset>, IEquatable<DateTimeOffset>, IFormattable, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable
+//public DateTimeKind Kind { get; } //Gets a value that indicates whether the time represented by this instance is based on local time, Coordinated Universal Time (UTC), or neither.
+
+###Conversions from DateTime to DateTimeOffset (https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#conversions-from-datetime-to-datetimeoffset)
+The DateTimeOffset structure provides two equivalent ways to perform DateTime to DateTimeOffset conversion that are suitable for most conversions:
+->The DateTimeOffset constructor, which creates a new DateTimeOffset object based on a DateTime value.
+->The implicit conversion operator, which allows you to assign a DateTime value to a DateTimeOffset object.
+
+
+
+
+

@@ -1,0 +1,11 @@
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\bin\Debug\netcoreapp2.1\DateTimePlayground.deps.json
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\bin\Debug\netcoreapp2.1\DateTimePlayground.runtimeconfig.json
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\bin\Debug\netcoreapp2.1\DateTimePlayground.runtimeconfig.dev.json
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\bin\Debug\netcoreapp2.1\DateTimePlayground.dll
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\bin\Debug\netcoreapp2.1\DateTimePlayground.pdb
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\obj\Debug\netcoreapp2.1\DateTimePlayground.csprojAssemblyReference.cache
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\obj\Debug\netcoreapp2.1\DateTimePlayground.csproj.CoreCompileInputs.cache
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\obj\Debug\netcoreapp2.1\DateTimePlayground.AssemblyInfoInputs.cache
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\obj\Debug\netcoreapp2.1\DateTimePlayground.AssemblyInfo.cs
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\obj\Debug\netcoreapp2.1\DateTimePlayground.dll
+c:\users\sinan.nar\source\repos\DateTimePlayground\DateTimePlayground\obj\Debug\netcoreapp2.1\DateTimePlayground.pdb
