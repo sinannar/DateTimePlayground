@@ -24,7 +24,7 @@ namespace DateTimePlayground.ConvertingBetweenDateTimeAndDateTimeOffset
             sourceTime = new DateTimeOffset(baseTime,
                                             TimeZoneInfo.Local.GetUtcOffset(baseTime));
             targetTime = sourceTime.DateTime;
-            Console.WriteLine("{0} converts to {1} {2}",
+            Console.WriteLine("|{0}| converted to |{1}| |{2}|",
                               sourceTime,
                               targetTime,
                               targetTime.Kind.ToString());
@@ -35,7 +35,7 @@ namespace DateTimePlayground.ConvertingBetweenDateTimeAndDateTimeOffset
                 TimeSpan offset = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time").GetUtcOffset(baseTime);
                 sourceTime = new DateTimeOffset(baseTime, offset);
                 targetTime = sourceTime.DateTime;
-                Console.WriteLine("{0} converts to {1} {2}",
+                Console.WriteLine("|{0}| converted to |{1}| |{2}|",
                                   sourceTime,
                                   targetTime,
                                   targetTime.Kind.ToString());

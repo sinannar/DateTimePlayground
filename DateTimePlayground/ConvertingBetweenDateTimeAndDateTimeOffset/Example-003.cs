@@ -10,7 +10,7 @@ namespace DateTimePlayground.ConvertingBetweenDateTimeAndDateTimeOffset
         {
             DateTime time1 = new DateTime(2008, 6, 19, 7, 0, 0);  // Kind is DateTimeKind.Unspecified
             DateTimeOffset time2 = time1;
-            Console.WriteLine("Converted {0} {1} to a DateTimeOffset value of {2}",
+            Console.WriteLine("Converted |{0}| |{1}| to a DateTimeOffset value of |{2}|",
                               time1,
                               time1.Kind.ToString(),
                               time2);

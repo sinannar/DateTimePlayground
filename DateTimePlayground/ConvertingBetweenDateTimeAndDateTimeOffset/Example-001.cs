@@ -11,7 +11,7 @@ namespace DateTimePlayground.ConvertingBetweenDateTimeAndDateTimeOffset
             DateTime utcTime1 = new DateTime(2008, 6, 19, 7, 0, 0);
             utcTime1 = DateTime.SpecifyKind(utcTime1, DateTimeKind.Utc);
             DateTimeOffset utcTime2 = utcTime1;
-            Console.WriteLine("Converted {0} {1} to a DateTimeOffset value of {2}",
+            Console.WriteLine("Converted |{0}| |{1}| to a DateTimeOffset value of |{2}|",
                               utcTime1,
                               utcTime1.Kind.ToString(),
                               utcTime2);

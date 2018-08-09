@@ -1,12 +1,12 @@
 ﻿https://docs.microsoft.com/en-us/dotnet/standard/datetime/
 https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset
 
-##Converting between DateTime and DateTimeOffset
+## Converting between DateTime and DateTimeOffset
 Although the DateTimeOffset structure provides a greater degree of time zone awareness than the DateTime structure, DateTime parameters are used more commonly in method calls. 
 Because of this, the ability to convert DateTimeOffset values to DateTime values and vice versa is particularly important.
 This topic shows how to perform these conversions in a way that preserves as much time zone information as possible.
 
-###!NOTE
+### !NOTE
 Both the DateTime and the DateTimeOffset types have some limitations when representing times in time zones.
 With its Kind property, DateTime is able to reflect only Coordinated Universal Time (UTC) and the system's local time zone.
 DateTimeOffset reflects a time's offset from UTC, but it does not reflect the actual time zone to which that offset belongs.
@@ -15,12 +15,60 @@ For details about time values and support for time zones, see Choosing Between D
 //public struct DateTimeOffset	: IComparable, IComparable<DateTimeOffset>, IEquatable<DateTimeOffset>, IFormattable, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable
 //public DateTimeKind Kind { get; } //Gets a value that indicates whether the time represented by this instance is based on local time, Coordinated Universal Time (UTC), or neither.
 
-###Conversions from DateTime to DateTimeOffset (https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#conversions-from-datetime-to-datetimeoffset)
+### Conversions from DateTime to DateTimeOffset (https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#conversions-from-datetime-to-datetimeoffset)
 The DateTimeOffset structure provides two equivalent ways to perform DateTime to DateTimeOffset conversion that are suitable for most conversions:
 ->The DateTimeOffset constructor, which creates a new DateTimeOffset object based on a DateTime value.
 ->The implicit conversion operator, which allows you to assign a DateTime value to a DateTimeOffset object.
+For UTC and local DateTime values, the Offset property of the resulting DateTimeOffset value accurately reflects the UTC or local time zone offset.
 
+For example, code in Example_001 converts a UTC time to its equivalent DateTimeOffset value. 
+Example_001, utcTime2 ios 00:00. Similarly, Example_002 converts a local time to its equivalent DateTimeOffset value.
+However, for DateTime values whose Kind property is DateTimeKind.Unspecified, these two conversion methods produce a DateTimeOffset value whose offset is that of the local time zone.
+This is shown in the Example_003.
+If the DateTime value reflects the date and time in something other than the local time zone or UTC, you can convert it to a DateTimeOffset value and preserve its time zone information by calling the overloaded DateTimeOffset constructor.
+Example_004 instantiates a DateTimeOffset object that reflects Central Standard Time
+The second parameter to this constructor overload, a TimeSpan object that represents the time's offset from UTC, should be retrieved by calling the TimeZoneInfo.GetUtcOffset(DateTime) method of the time's corresponding time zone.
+The method's single parameter is the DateTime value that represents the date and time to be converted.
+If the time zone supports daylight saving time, this parameter allows the method to determine the appropriate offset for that particular date and time.
 
+### Conversions from DateTimeOffset to DateTime (https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#conversions-from-datetimeoffset-to-datetime)
+The DateTime property is most commonly used to perform DateTimeOffset to DateTime conversion.
+However, it returns a DateTime value whose Kind property is Unspecified, as the Example_005 illustrates.
+https://msdn.microsoft.com/en-us/library/system.timezoneinfo.findsystemtimezonebyid(v=vs.110).aspx - FindSystemTimeZoneById
+https://msdn.microsoft.com/en-us/library/system.timezoneinfo.id(v=vs.110).aspx - TimeZoneInfo.Id Property in FindSystemTimeZoneById
+// public sealed class TimeZoneInfo : IEquatable<TimeZoneInfo>, IDeserializationCallback, ISerializable
+// public static ReadOnlyCollection<TimeZoneInfo> GetSystemTimeZones();  // part of TimeZoneInfo 
 
+This means that any information about the DateTimeOffset value's relationship to UTC is lost by the conversion when the DateTime property is used.
+This affects DateTimeOffset values that correspond to UTC time or to the system's local time because the DateTime structure reflects only those two time zones in its Kind property.
+To preserve as much time zone information as possible when converting a DateTimeOffset to a DateTime value, you can use the DateTimeOffset.UtcDateTime and DateTimeOffset.LocalDateTime properties.
 
+#### Converting a UTC time (https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#converting-a-utc-time)
+To indicate that a converted DateTime value is the UTC time, you can retrieve the value of the DateTimeOffset.UtcDateTime property.
+Example_006 and Example_007 for this purpose
 
+#### Converting a local time (https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#converting-a-local-time)
+To indicate that a DateTimeOffset value represents the local time, you can pass the DateTime value returned by the DateTimeOffset.DateTime property to the static (Shared in Visual Basic) SpecifyKind method.
+The method returns the date and time passed to it as its first parameter, but sets the Kind property to the value specified by its second parameter.
+Example_008 uses the SpecifyKind method when converting a DateTimeOffset value whose offset corresponds to that of the local time zone.
+
+You can also use the DateTimeOffset.LocalDateTime property to convert a DateTimeOffset value to a local DateTime value.
+The Kind property of the returned DateTime value is Local.
+Example_009 uses the DateTimeOffset.LocalDateTime property when converting a DateTimeOffset value whose offset corresponds to that of the local time zone.
+
+When you retrieve a DateTime value using the DateTimeOffset.LocalDateTime property, the property's get accessor first converts the DateTimeOffset value to UTC, then converts it to local time by calling the ToLocalTime method.
+This means that you can retrieve a value from the DateTimeOffset.LocalDateTime property to perform a time zone conversion at the same time that you perform a type conversion.
+It also means that the local time zone's adjustment rules are applied in performing the conversion. 
+Example_011 illustrates the use of the DateTimeOffset.LocalDateTime property to perform both a type and a time zone conversion.
+
+#### A general-purpose conversion method (https://docs.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset#a-general-purpose-conversion-method)
+Example_012 defines a method named ConvertFromDateTimeOffset that converts DateTimeOffset values to DateTime values.
+Based on its offset, it determines whether the DateTimeOffset value is a UTC time, a local time, or some other time, and defines the returned date and time value's Kind property accordingly.
+
+The Example_013 calls the ConvertFromDateTimeOffset method to convert DateTimeOffset values that represent a UTC time, a local time, and a time in the U.S. Central Standard Time zone.
+Note that this code makes two assumptions that, depending on the application and the source of its date and time values, may not always be valid:
+->It assumes that a date and time value whose offset is TimeSpan.Zero represents UTC. 
+In fact, UTC is not a time in a particular time zone, but the time in relation to which the times in the world's time zones are standardized. 
+Time zones can also have an offset of Zero.
+->It assumes that a date and time whose offset equals that of the local time zone represents the local time zone.
+Because date and time values are disassociated from their original time zone, this may not be the case; the date and time can have originated in another time zone with the same offset.

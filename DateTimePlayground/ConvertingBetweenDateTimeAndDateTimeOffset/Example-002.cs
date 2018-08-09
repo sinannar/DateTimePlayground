@@ -11,7 +11,7 @@ namespace DateTimePlayground.ConvertingBetweenDateTimeAndDateTimeOffset
             DateTime localTime1 = new DateTime(2008, 6, 19, 7, 0, 0);
             localTime1 = DateTime.SpecifyKind(localTime1, DateTimeKind.Local);
             DateTimeOffset localTime2 = localTime1;
-            Console.WriteLine("Converted {0} {1} to a DateTimeOffset value of {2}",
+            Console.WriteLine("Converted |{0}| |{1}| to a DateTimeOffset value of |{2}|",
                               localTime1,
                               localTime1.Kind.ToString(),
                               localTime2);

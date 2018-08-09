@@ -13,7 +13,7 @@ namespace DateTimePlayground.ConvertingBetweenDateTimeAndDateTimeOffset
             {
                 DateTimeOffset time2 = new DateTimeOffset(time1,
                                TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time").GetUtcOffset(time1));
-                Console.WriteLine("Converted {0} {1} to a DateTime value of {2}",
+                Console.WriteLine("Converted |{0}| |{1}| to a DateTimeOffset value of |{2}|",
                                   time1,
                                   time1.Kind.ToString(),
                                   time2);
