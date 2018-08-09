@@ -72,3 +72,4 @@ In fact, UTC is not a time in a particular time zone, but the time in relation t
 Time zones can also have an offset of Zero.
 ->It assumes that a date and time whose offset equals that of the local time zone represents the local time zone.
 Because date and time values are disassociated from their original time zone, this may not be the case; the date and time can have originated in another time zone with the same offset.
+

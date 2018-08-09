@@ -7,7 +7,7 @@ namespace DateTimePlayground
         public static void Main(string[] args)
         {
             ConvertingBetweenDateTimeAndDateTimeOffset.RunExamples.RunMain();
-
+            SideTracks.DateTimeSideTrack.RunMain();
 
         }
     }
