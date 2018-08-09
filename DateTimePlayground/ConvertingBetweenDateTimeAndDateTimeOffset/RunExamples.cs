@@ -41,11 +41,15 @@ namespace DateTimePlayground.ConvertingBetweenDateTimeAndDateTimeOffset
             //Example_011.RunMain();
             //Console.ReadKey();
 
-            Example_012.RunMain();
+            //Example_012.RunMain();
+            //Console.ReadKey();
+
+            //Example_013.RunMain();
+            //Console.ReadKey();
+
+            Example_DateTimeKindProperty.RunMain();
             Console.ReadKey();
 
-            Example_013.RunMain();
-            Console.ReadKey();
         }
     }
 }
